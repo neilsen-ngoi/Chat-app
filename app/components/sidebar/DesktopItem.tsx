@@ -12,7 +12,7 @@ interface DesktopItemProps {
 }
 // freaking sidebar stuff
 const DesktopItem: React.FC<DesktopItemProps> = ({
-  label, 
+  label,
   icon: Icon,
   href,
   onClick,
@@ -24,6 +24,7 @@ const DesktopItem: React.FC<DesktopItemProps> = ({
       return onClick()
     }
   }
+
   return (
     <li onClick={handleClick}>
       <Link
