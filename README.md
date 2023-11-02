@@ -3,3 +3,4 @@ MongoDB
 Prisma  
 Cloudinary
 NextAuth
+Tailwind
