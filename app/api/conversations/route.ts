@@ -5,18 +5,19 @@ import prisma from '@/app/libs/prismadb'
 export async function POST(request: Request) {
   try {
     const currentUser = await getCurrentUser()
+    console.log(currentUser?.id, currentUser?.email)
     const body = await request.json()
     // additional elements for group chats
     const {
       userId, //one-on-one convo
       isGroup, // group chats
-      memebers,
+      members,
       name,
     } = body
-    if (!currentUser?.id || currentUser?.email) {
+    if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse('Unathorized', { status: 401 })
     }
-    if (isGroup && (!memebers || memebers.length < 2 || !name)) {
+    if (isGroup && (!members || members.length < 2 || !name)) {
       return new NextResponse('Invalid data', { status: 400 })
     }
     if (isGroup) {
@@ -27,7 +28,7 @@ export async function POST(request: Request) {
           users: {
             connect: [
               // connect user by id
-              ...memebers.map((member: { value: string }) => ({
+              ...members.map((member: { value: string }) => ({
                 id: member.value,
               })),
               {

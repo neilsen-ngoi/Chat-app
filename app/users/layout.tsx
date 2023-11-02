@@ -3,6 +3,7 @@ import Sidebar from '../components/sidebar/Sidebar'
 import getUsers from '../actions/getUsers'
 
 import UserList from './components/UserList'
+
 // specific layout for users page
 export default async function UserLayout({
   children,
