@@ -2,5 +2,5 @@ Next.js
 MongoDB  
 Prisma  
 Cloudinary
-NextAuth
+NextAuth  
 Tailwind
