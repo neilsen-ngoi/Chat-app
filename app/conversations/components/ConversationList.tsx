@@ -1,4 +1,5 @@
 'use client'
+import ConversationBox from './ConversationBox'
 import useConversation from '@/app/hooks/useConversation'
 import { FullConversationType } from '@/app/types'
 import clsx from 'clsx'
@@ -42,10 +43,23 @@ const ConversationList: React.FC<ConversationListProps> = ({
           >
             Messages
           </div>
-          <div>
-            <MdOutlineGroupAdd />
+          <div
+            className="
+          rounded-full
+          text-gray-600
+          p-2 bg-gray-100
+          cursor-pointer hover:opacity-75 transition"
+          >
+            <MdOutlineGroupAdd size={20} />
           </div>
         </div>
+        {items.map((item) => (
+          <ConversationBox
+            key={item.id}
+            data={item}
+            selected={conversationId === item.id}
+          />
+        ))}
       </div>
     </aside>
   )
