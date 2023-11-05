@@ -21,7 +21,13 @@ const ConversationId = async ({ params }: { params: IParams }) => {
     );
   }
 
-  return <div>conversation ID!</div>;
+  return ( 
+     <div className="lg:pl-80 h-full">
+         <div className="h-full flex flex-col">
+            conversation ID!
+        </div>
+    </div>
+  )
 };
 
 export default ConversationId;
