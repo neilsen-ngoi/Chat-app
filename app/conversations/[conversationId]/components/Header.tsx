@@ -4,7 +4,7 @@ import useOtherUser from '@/app/hooks/useOtherUser'
 import { Conversation, User } from '@prisma/client'
 import { useMemo } from 'react'
 import Link from 'next/link'
-import { HiChevronLeft } from 'react-icons/hi2'
+import { HiChevronLeft, HiOutlineEllipsisHorizontal } from 'react-icons/hi2'
 import Avatar from '@/app/components/Avatar'
 
 interface HeaderProps {
@@ -34,7 +34,16 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
           <HiChevronLeft size={32} />
         </Link>
         <Avatar user={otherUser} />
+        <div className="flex flex-col">
+          <div>{conversation.name || otherUser.name}</div>
+          <div className="textsm font-light text-neutral-500">{statusText}</div>
+        </div>
       </div>
+      <HiOutlineEllipsisHorizontal
+        size={32}
+        onClick={() => {}}
+        className="text-slate-500 cursor-pointer hover:text-slate-600 transition"
+      />
     </div>
   )
 }
