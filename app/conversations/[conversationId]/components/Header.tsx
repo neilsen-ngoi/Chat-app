@@ -1,4 +1,4 @@
-'use-client'
+'use client'
 
 import useOtherUser from "@/app/hooks/useOtherUser"
 import { Conversation,User } from "@prisma/client"
