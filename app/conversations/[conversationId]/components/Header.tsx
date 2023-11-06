@@ -1,7 +1,7 @@
 'use-client'
 
+import useOtherUser from "@/app/hooks/useOtherUser"
 import { Conversation,User } from "@prisma/client"
-import useOtherUser from '@/app/hooks/useOtherUser'
 import { useMemo } from "react"
 import Link from "next/link"
 import { HiChevronLeft } from "react-icons/hi2"
@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = ({conversation}) => {
     const statusText = useMemo(()=> {
         if(conversation.isGroup) {
             // show number of members in group conversation
-            return `${conversation.users.length}members`
+            return `${conversation.users.length} members`
         }
         return 'Active'
     },[conversation])
