@@ -6,5 +6,4 @@ NextAuth
 Tailwind
 Pusher
 Hot-toast
-test
-test 2
+Headless UI
