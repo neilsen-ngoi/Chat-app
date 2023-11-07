@@ -10,13 +10,12 @@ export async function POST(request: Request, { params }: { params: IParams }) {
   try {
     const currentUser = await getCurrentUser()
     const { conversationId } = params
-
-    if (!currentUser?.id || currentUser?.email) {
+    if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse('Unathourized', { status: 401 })
     }
 
     // find existing conversation
-    const conversation = await prisma?.conversation.findUnique({
+    const conversation = await prisma.conversation.findUnique({
       where: {
         id: conversationId,
       },
@@ -39,7 +38,6 @@ export async function POST(request: Request, { params }: { params: IParams }) {
     if (!lastMessage) {
       return NextResponse.json(conversation)
     }
-
     // update seen of last msg
     const updatedMessage = await prisma.message.update({
       where: {

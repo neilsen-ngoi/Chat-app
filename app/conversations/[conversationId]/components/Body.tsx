@@ -10,7 +10,6 @@ interface BodyProps {
 
 const Body: React.FC<BodyProps> = ({ initialMessages }) => {
   const [messages, setMessages] = useState<FullMessageType[]>(initialMessages)
-  console.log(messages)
   // scrolls to btm latest msg
   const bottomRef = useRef<HTMLDivElement>(null)
   const { conversationId } = useConversation()

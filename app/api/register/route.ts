@@ -8,7 +8,6 @@ export async function POST(request: Request) {
     // input should included: email, name, password
     const body = await request.json()
 
-    console.log(body)
     const { email, name, password } = body
 
     if (!email || !name || !password) {
