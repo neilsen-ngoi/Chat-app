@@ -26,9 +26,11 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
   }, [conversation])
   return (
     <>
-    <ProfileDrawer data={conversation}
-    isOpen={drawerOpen}
-    onClose={()=setDrawerOpen()}
+      <ProfileDrawer
+        data={conversation}
+        isOpen={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      />
       <div className="bg-white w-full flex border-b-[1px] sm:px-4 py-3 px-4 lg:px-6 justify-between items-center shadow-sm">
         <div className="flex gap-3 items-center">
           {/* mobile only */}
@@ -48,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
         </div>
         <HiOutlineEllipsisHorizontal
           size={32}
-          onClick={() => {}}
+          onClick={() => setDrawerOpen(true)}
           className="text-slate-500 cursor-pointer hover:text-slate-600 transition"
         />
       </div>
