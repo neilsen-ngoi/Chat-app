@@ -8,6 +8,9 @@ import { useState } from "react"
 import { FieldValue, FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import Modal from "../Modal"
+import Input from "../inputs/Input"
+import Image from "next/image"
+import { CldUploadButton } from "next-cloudinary"
 
 interface SettingsModalProps {
   currentUser: User
@@ -50,6 +53,16 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ currentUser, isOpen, onCl
           <div className=" border-b border-gray-900/10 pb-12">
             <h2 className=" text-base font-semibold leading-7 text-gray-900 ">Profile</h2>
             <p className=" mt-1 text-sm leading-6 text-gray-600">Edit your info</p>
+            <div className=" mt-10 flex flex-col gap-y-8">
+              <Input disabled={isLoading} label="Name" id="name" errors={errors} required register={register} />
+              <div >
+                <label className=" block text-sm font-medium leading-6 text-gray-900">photo</label>
+                <div className=" mt-2 flex items-center gap-x-3">
+                  <Image alt="avatar" width={48} height={48} className=" rounded-full" src={image || currentUser?.image || '/imgaes/placeholder.jpg'} />
+                  <CldUploadButton options={{ maxFiles: 1 }} onUpload={handleUpload} uploadPreset='messenger'></CldUploadButton>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </form>
