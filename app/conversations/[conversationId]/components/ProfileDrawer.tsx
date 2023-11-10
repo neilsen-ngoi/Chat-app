@@ -1,14 +1,12 @@
 'use client'
-import ConfirmModal from './ConfirmModal'
-import { IoClose, IoCloseCircle, IoTrash } from 'react-icons/io5'
+import Avatar from '@/app/components/Avatar'
 import useOtherUser from '@/app/hooks/useOtherUser'
 import { Dialog, Transition } from '@headlessui/react'
 import { Conversation, User } from '@prisma/client'
 import { format } from 'date-fns'
-import { Children, Fragment, useMemo } from 'react'
-import Avatar from '@/app/components/Avatar'
-import Modal from '@/app/components/Modal'
-import { useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
+import { IoCloseCircle, IoTrash } from 'react-icons/io5'
+import ConfirmModal from './ConfirmModal'
 interface ProfileDrawerProps {
   isOpen: boolean
   onClose: () => void
