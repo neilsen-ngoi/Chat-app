@@ -21,6 +21,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
+          <div className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity' />
+        </Transition.Child>
+        <div className='fixed inset-0 z-10 overflow-y-auto'>
           <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
             <Transition.Child
               as={Fragment}
@@ -46,14 +49,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                     <IoClose className="h-6 w-6" />
                   </button>
                 </div>
-                {Children}
+                {children}
               </Dialog.Panel>
             </Transition.Child>
           </div>
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-        </Transition.Child>
+        </div>
       </Dialog>
-    </Transition.Root>
+    </Transition.Root >
   )
 }
 
