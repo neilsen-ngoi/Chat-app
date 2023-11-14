@@ -11,6 +11,7 @@ import Modal from "../Modal"
 import Input from "../inputs/Input"
 import Image from "next/image"
 import { CldUploadButton } from "next-cloudinary"
+import Button from "../Button"
 
 interface SettingsModalProps {
   currentUser: User
@@ -59,10 +60,17 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ currentUser, isOpen, onCl
                 <label className=" block text-sm font-medium leading-6 text-gray-900">photo</label>
                 <div className=" mt-2 flex items-center gap-x-3">
                   <Image alt="avatar" width={48} height={48} className=" rounded-full" src={image || currentUser?.image || '/imgaes/placeholder.jpg'} />
-                  <CldUploadButton options={{ maxFiles: 1 }} onUpload={handleUpload} uploadPreset='messenger'></CldUploadButton>
+                  <CldUploadButton options={{ maxFiles: 1 }} onUpload={handleUpload} uploadPreset='messenger'>
+                    <Button disabled={isLoading} secondary type="button">change</Button>
+                  </CldUploadButton>
                 </div>
               </div>
             </div>
+          </div>
+          <div className=" mt-6 flex items-center justify-end gap-x-6">
+
+            <Button disabled={isLoading} secondary onClick={onClose} >cancel</Button>
+            <Button disabled={isLoading} type="submit">save</Button>
           </div>
         </div>
       </form>
