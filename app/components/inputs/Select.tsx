@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react"
+import ReactSelect from 'react-select'
 
 interface SelectProps {
   label: string
@@ -15,6 +15,25 @@ const Select: React.FC<SelectProps> = ({ label, value, onChange, options, disabl
     <div className=" z-[100]">
       <label className=" text-sm block font-medium leading-6 text-gray-600">
         {label}
+        <div className=" mt-2">
+          <ReactSelect
+            isDisabled={disabled}
+            value={value}
+            onChange={onChange}
+            isMulti
+            options={options}
+            menuPortalTarget={document.body}
+            styles={{
+              menuPortal: (base) => ({
+                ...base,
+                zIndex: 9999
+              }),
+            }}
+            classNames={{
+              control: () => 'text-sm'
+            }}
+          />
+        </div>
       </label>
     </div>
   )
