@@ -10,6 +10,7 @@ import Modal from "@/app/components/Modal"
 import { User } from "@prisma/client"
 import Input from "@/app/components/inputs/Input"
 import Select from "@/app/components/inputs/Select"
+import Button from "@/app/components/Button"
 
 interface GroupChatModalProps {
   isOpen?: boolean
@@ -17,13 +18,13 @@ interface GroupChatModalProps {
   users: User[]
 }
 
-const GroupChatModal: React.FC<GroupChatModalProps> = ({ isOpen, onClose, users }) => {
+const GroupChatModal: React.FC<GroupChatModalProps> = ({ isOpen, onClose, users = [] }) => {
 
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<FieldValues>({
     defaultValues: {
-      name: " ",
+      name: "",
       members: []
     }
   })
@@ -60,10 +61,28 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({ isOpen, onClose, users 
                 label="Members"
                 options={users.map((user) => ({
                   value: user.id,
-                  name: user.name
+                  label: user.name
                 }))} />
             </div>
           </div>
+        </div>
+        <div
+          className=" mt-6 flex items-center justify-end gap-x-6 "
+        >
+          <Button
+            disabled={isLoading}
+            onClick={onClose}
+            type="button"
+            secondary
+          >
+            Cancel
+          </Button>
+          <Button
+            disabled={isLoading}
+            type="submit"
+          >
+            Create
+          </Button>
         </div>
       </form>
 
