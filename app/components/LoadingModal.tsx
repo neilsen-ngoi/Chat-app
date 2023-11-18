@@ -22,6 +22,20 @@ const LoadingModal = () => {
                 >
                     <div className=" fixed inset-0 bg-gray-100 bg-opacity-50 transition-opacity" />
                 </Transition.Child>
+                <div className=" fixed inset-0 z-10 overflow-y-auto">
+                    <div className="
+                    flex
+                    min-h-full 
+                    justify-center
+                    items-center
+                    p-4
+                    text-center
+                    ">
+                        <Dialog.Panel>
+                            <ClipLoader size={40} color="#0284c7" />
+                        </Dialog.Panel>
+                    </div>
+                </div>
             </Dialog>
         </Transition.Root>
     )
