@@ -1,3 +1,4 @@
+JavaScript
 Next.js  
 MongoDB  
 Prisma  
@@ -7,6 +8,3 @@ Tailwind
 Pusher
 Hot-toast
 Headless UI
-
-
-
