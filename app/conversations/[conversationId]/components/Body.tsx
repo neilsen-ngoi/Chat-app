@@ -27,10 +27,12 @@ const Body: React.FC<BodyProps> = ({ initialMessages }) => {
     bottomRef?.current?.scrollIntoView()
 
     const messageHandler = (message: FullMessageType) => {
+      axios.post(`/api/conversations/${conversationId}/seen`)
       setMessages((current) => {
         if (find(current, { id: message.id })) { return current }
         return [...current, message]
       })
+      bottomRef?.current?.scrollIntoView()
     }
 
     pusherClient.bind('messages:new', messageHandler)
@@ -40,6 +42,7 @@ const Body: React.FC<BodyProps> = ({ initialMessages }) => {
       pusherClient.unbind('messages:new', messageHandler)
     }
   }, [conversationId])
+
 
   return (
     <div className="flex-1 overflow-y-auto">
