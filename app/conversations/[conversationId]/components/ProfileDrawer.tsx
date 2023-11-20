@@ -8,6 +8,7 @@ import { Fragment, useMemo, useState } from 'react'
 import { IoCloseCircle, IoTrash } from 'react-icons/io5'
 import ConfirmModal from './ConfirmModal'
 import AvatarGroup from '@/app/components/AvatarGroup'
+import useActiveList from '@/app/hooks/useActiveList'
 interface ProfileDrawerProps {
   isOpen: boolean
   onClose: () => void
@@ -36,6 +37,11 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     }
     return 'Active'
   }, [data])
+
+  const { members } = useActiveList()
+
+
+
 
   return (
     <>
