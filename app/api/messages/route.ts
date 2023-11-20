@@ -56,11 +56,12 @@ export async function POST(request: Request) {
     })
 
     await pusherServer.trigger(conversationId, 'messages:new', newMessage)
+
     const lastMessage =
       updatedConversation.messages[updatedConversation.messages.length - 1]
 
     updatedConversation.users.map((user) => {
-      pusherServer.trigger(user.email!, 'conversationUpdate', {
+      pusherServer.trigger(user.email!, 'conversation:Update', {
         id: conversationId,
         messages: [lastMessage],
       })
@@ -68,6 +69,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(newMessage)
   } catch (error: any) {
+    console.log(error, 'ERROR_MESSAGES')
     return new NextResponse('Internal Error', { status: 500 })
   }
 }
