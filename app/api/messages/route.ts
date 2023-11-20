@@ -61,7 +61,7 @@ export async function POST(request: Request) {
       updatedConversation.messages[updatedConversation.messages.length - 1]
 
     updatedConversation.users.map((user) => {
-      pusherServer.trigger(user.email!, 'conversation:Update', {
+      pusherServer.trigger(user.email!, 'conversation:update', {
         id: conversationId,
         messages: [lastMessage],
       })

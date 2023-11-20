@@ -44,13 +44,13 @@ const Body: React.FC<BodyProps> = ({ initialMessages }) => {
       }))
     }
 
-    pusherClient.bind('message:new', messageHandler)
+    pusherClient.bind('messages:new', messageHandler)
     pusherClient.bind('message:update', updateMessageHandler)
 
     // unmount
     return () => {
       pusherClient.unsubscribe(conversationId)
-      pusherClient.unbind('message:new', messageHandler)
+      pusherClient.unbind('messages:new', messageHandler)
       pusherClient.unbind('message:update', updateMessageHandler)
 
     }
