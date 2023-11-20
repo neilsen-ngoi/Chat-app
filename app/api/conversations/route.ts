@@ -1,6 +1,8 @@
 import getCurrentUser from '@/app/actions/getCurrentUser'
 import { NextResponse } from 'next/server'
 import prisma from '@/app/libs/prismadb'
+import Pusher from 'pusher'
+import { pusherServer } from '@/app/libs/Pusher'
 
 export async function POST(request: Request) {
   try {
@@ -13,6 +15,7 @@ export async function POST(request: Request) {
       members,
       name,
     } = body
+
     if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse('Unathorized', { status: 401 })
     }
@@ -40,6 +43,12 @@ export async function POST(request: Request) {
           users: true,
         },
       })
+      newConversation.users.forEach((user) => {
+        if (user.email) {
+          pusherServer.trigger(user.email, 'conversation:new', newConversation)
+        }
+      })
+
       return NextResponse.json(newConversation)
     }
 
@@ -83,6 +92,13 @@ export async function POST(request: Request) {
         users: true,
       },
     })
+
+    newConversation.users.forEach((user) => {
+      if (user.email) {
+        pusherServer.trigger(user.email, 'conversation:new', newConversation)
+      }
+    })
+
     return NextResponse.json(newConversation)
   } catch (error: any) {
     return new NextResponse('Internal error', { status: 500 })

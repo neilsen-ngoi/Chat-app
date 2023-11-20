@@ -1,14 +1,15 @@
 'use client'
+
+import clsx from 'clsx'
 import { format } from 'date-fns'
 import { useSession } from 'next-auth/react'
-import clsx from 'clsx'
-import React, { useCallback, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { Conversation, Message, User } from '@prisma/client'
-import { FullConversationType } from '@/app/types'
-import useOtherUser from '@/app/hooks/useOtherUser'
+import React, { useCallback, useMemo } from 'react'
+
 import Avatar from '@/app/components/Avatar'
 import AvatarGroup from '@/app/components/AvatarGroup'
+import useOtherUser from '@/app/hooks/useOtherUser'
+import { FullConversationType } from '@/app/types'
 
 interface ConversationBoxProps {
   data: FullConversationType
@@ -19,9 +20,13 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
   data,
   selected,
 }) => {
-  const otherUser = useOtherUser(data)
+  console.log('DATA', data)
+
   const session = useSession()
   const router = useRouter()
+  const otherUser = useOtherUser(data)
+  console.log("OTHERUSER", otherUser)
+
   const handleClick = useCallback(() => {
     router.push(`/conversations/${data.id}`)
   }, [data.id, router])
@@ -32,18 +37,22 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
     return messages[messages.length - 1]
   }, [data.messages])
 
-  const userEmail = useMemo(() => {
-    return session.data?.user?.email
-  }, [session.data?.user?.email])
+  const userEmail = useMemo(() =>
+    session.data?.user?.email
+    , [session.data?.user?.email])
+
 
   const hasSeen = useMemo(() => {
     if (!lastMessage) {
       return false
     }
+
     const seenArray = lastMessage.seen || []
+
     if (!userEmail) {
       return false
     }
+
     return seenArray.filter((user) => user.email === userEmail).length !== 0
   }, [userEmail, lastMessage])
 
@@ -65,14 +74,19 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
       )}
       onClick={handleClick}
     >
+
       {data.isGroup ? (
         <AvatarGroup users={data.users} />
       ) : (<Avatar user={otherUser} />)}
+
+
       <div className="min-w-0 flex-1">
         <div className="focus:outline-none">
           <div className="flex justify-between items-center mb-1">
             <p className="text-md font-medium text-gray-900">
-              {data.name || otherUser.name}
+
+
+              {data.name || otherUser?.name}
             </p>
             {lastMessage?.createdAt && (
               <p className="text-xs text-gray-400 font-light">
